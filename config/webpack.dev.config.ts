@@ -22,7 +22,7 @@ const config: webpack.Configuration = webpackMerge(commonConfig, {
     module: {
         rules: [{
             test: /\.ts$/,
-            loaders: ['ts-loader']
+            loaders: ['ts-loader', 'angular2-template-loader']
         }]
     },
     plugins: [

@@ -4,13 +4,16 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config: webpack.Configuration = {
     target: 'web',
-    entry: path.resolve(__dirname, '../src/index.ts'),
+    entry: {
+        polyfills: path.resolve(__dirname, '../src/polyfills.ts'),
+        main: path.resolve(__dirname, '../src/index.ts')
+    },
     resolve: {
         extensions: ['.ts', '.js', '.json']
     },
     module: {
         rules: [{
-            test: /.html$/,
+            test: /\.html$/,
             include: [
                 path.resolve(__dirname, '../src')
             ],
@@ -24,6 +27,6 @@ const config: webpack.Configuration = {
             inject: 'body'
         })
     ]
-}
+};
 
 export default config;

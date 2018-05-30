@@ -1,20 +1,31 @@
 import webpack from 'webpack';
-import path from 'path'
+import path from 'path';
 import webpackMerge from 'webpack-merge';
-import commonConfig from './webpack.common.config';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
+import commonConfig from './webpack.common.config';
+import {AngularCompilerPlugin} from '@ngtools/webpack';
 // import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const config: webpack.Configuration = webpackMerge(commonConfig, {
     mode: 'production',
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: 'bundle.[hash].js'
+        filename: '[name].[hash].js'
+    },
+    module: {
+        rules: [{
+            test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+            loader: '@ngtools/webpack'
+        }]
     },
     plugins: [
         new CleanWebpackPlugin('dist', {
             root: path.resolve(__dirname, '../'),
             verbose: true
+        }),
+        new AngularCompilerPlugin({
+            tsConfigPath: path.resolve(__dirname, '../tsconfig.json'),
+            entryModule: path.resolve(__dirname, '../src/App/App.module#AppModule')
         })
     ]
 });
