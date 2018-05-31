@@ -9,6 +9,12 @@
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "strictPropertyInitialization": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
         "lib": [
             "dom",
             "es2017"
