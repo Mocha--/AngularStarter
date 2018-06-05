@@ -32,21 +32,7 @@ const config: webpack.Configuration = {
         }),
         new ScriptExtensionHtmlWebpackPlugin({
             defer: [main, polyfills]
-        }),
-        /**
-         * Plugin: ContextReplacementPlugin
-         * Description: Provides context to Angular's use of System.import
-         *
-         * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
-         * See: https://github.com/angular/angular/issues/11580
-         */
-        new webpack.ContextReplacementPlugin(
-            /**
-             * The (\\|\/) piece accounts for path separators in *nix and Windows
-             */
-            /\@angular(\\|\/)core(\\|\/)esm5/,
-            path.resolve(__dirname, '../src')
-        )
+        })
     ]
 };
 

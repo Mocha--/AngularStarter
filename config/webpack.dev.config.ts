@@ -23,6 +23,9 @@ const config: webpack.Configuration = webpackMerge(commonConfig, {
         rules: [{
             test: /\.ts$/,
             loaders: ['ts-loader', 'angular2-template-loader']
+        }, {
+            test: /\.styl$/,
+            loaders: ['style-loader', 'css-loader', 'postcss-loader', 'stylus-loader']
         }]
     },
     plugins: [

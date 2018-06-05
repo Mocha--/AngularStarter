@@ -4,7 +4,7 @@ import webpackMerge from 'webpack-merge';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import commonConfig from './webpack.common.config';
 import {AngularCompilerPlugin} from '@ngtools/webpack';
-// import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const config: webpack.Configuration = webpackMerge(commonConfig, {
     mode: 'production',
@@ -16,6 +16,9 @@ const config: webpack.Configuration = webpackMerge(commonConfig, {
         rules: [{
             test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
             loader: '@ngtools/webpack'
+        }, {
+            test: /\.styl$/,
+            loaders: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'stylus-loader']
         }]
     },
     plugins: [
@@ -26,6 +29,9 @@ const config: webpack.Configuration = webpackMerge(commonConfig, {
         new AngularCompilerPlugin({
             tsConfigPath: path.resolve(__dirname, '../tsconfig.json'),
             entryModule: path.resolve(__dirname, '../src/App/App.module#AppModule')
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[hash].css'
         })
     ]
 });
